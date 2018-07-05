@@ -70,16 +70,17 @@ public class Controller implements Initializable{
         int secondId = Integer.parseInt(secondIdTextField.getText());
 
 
-        List<Friend> firstFriends =  VK_API.doIt(firstId);
-        List<Friend> secondFriends = VK_API.doIt(secondId);
-        List<Friend> commonFriends = getCommonFriends(firstFriends, secondFriends);
+        List<Integer> firstFriendIds =  VK_API.getFriendIds(firstId);
+        List<Integer> secondFriendIds = VK_API.getFriendIds(secondId);
+        List<Integer> commonFriendIds = getCommonFriends(firstFriendIds, secondFriendIds);
         //List<Friend> friends = getFriendsInfo(friendsIds);
+        List<Friend> commonFriends = VK_API.getFriendsInfo(commonFriendIds);
         printFriends(commonFriends);
         //printFriends(friends);
     }
 
-    private List<Friend> getCommonFriends(List<Friend> firstFriends, List<Friend> secondFriends){
-        List<Friend> out = new ArrayList<>();
+    private List<Integer> getCommonFriends(List<Integer> firstFriends, List<Integer> secondFriends){
+        List<Integer> out = new ArrayList<>();
         for (int tmp = firstFriends.size() - 1; tmp >= 0; tmp--){
             if(secondFriends.contains(firstFriends.get(tmp)))out.add(firstFriends.get(tmp));
         }
@@ -88,7 +89,6 @@ public class Controller implements Initializable{
 
     private void printFriends(List<Friend> friends) {
         ObservableList<Friend> friendsList = FXCollections.observableArrayList(friends);
-        System.out.println(friends);
         friendsTableView.setItems(friendsList);
 //        for (Friend friend : friends){
 //            System.out.println(friend.id + " " + friend.name);

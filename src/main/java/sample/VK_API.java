@@ -13,6 +13,7 @@ import com.vk.api.sdk.objects.users.UserXtrCounters;
 import com.vk.api.sdk.queries.users.UserField;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,33 +28,15 @@ public class VK_API {
     static final String CLIENT_SECRET = "jVjLf7RP31NzgTNtbTOr";
     static final String SERVICE_KEY = "7092c71b7092c71b7092c71bea70f7d73d770927092c71b2ba97f558a5c77b9556f3c72";
 
-    static List<Friend> doIt(int id) {
-        TransportClient httpClient = HttpTransportClient.getInstance();
-        VkApiClient vk = new VkApiClient(httpClient);
+    static TransportClient httpClient = HttpTransportClient.getInstance();
+    static VkApiClient vk = new VkApiClient(httpClient);
 
-//        ServiceClientCredentialsFlowResponse authResponse = null;
-//        try {
-//            authResponse = vk.oauth()
-//                    .serviceClientCredentialsFlow(APP_ID, CLIENT_SECRET)
-//                    .execute();
-//        } catch (ApiException e) {
-//            e.printStackTrace();
-//        } catch (ClientException e) {
-//            e.printStackTrace();
-//        }
-//
+    static List<Friend> getFriendsInfo(List<Integer> friendIds) {
+
         ServiceActor actor = new ServiceActor(APP_ID, CLIENT_SECRET, SERVICE_KEY);
 
         List<Friend> friends = null;
         try {
-            GetResponse friendsResponse = vk.friends().get(actor)
-                    .userId(id)
-                    //.userId(77903915)
-                    .execute();
-
-            List<Integer> friendIds = friendsResponse.getItems();
-            System.out.println(friendIds);
-
             List<UserXtrCounters> usersResponse = vk.users().get(actor)
                     .userIds(friendIds.stream().map(i -> i.toString()).collect(Collectors.toList()))
                     .fields(UserField.CITY, UserField.PHOTO_MAX_ORIG, UserField.BOOKS, UserField.INTERESTS, UserField.SEX)
@@ -62,8 +45,6 @@ public class VK_API {
             friends = new LinkedList<>();
 
             for (UserXtrCounters user : usersResponse) {
-                System.out.println(user);
-
                 friends.add(new Friend(user.getId(), user.getFirstName(), user.getSex(), user.getLastName(), user.getBooks(), user.getInterests()));
             }
 
@@ -74,6 +55,25 @@ public class VK_API {
             e.printStackTrace();
         }
         return friends;
+    }
+
+    static List<Integer> getFriendIds(int id) {
+        ServiceActor actor = new ServiceActor(APP_ID, CLIENT_SECRET, SERVICE_KEY);
+
+        try {
+            GetResponse friendsResponse = vk.friends().get(actor)
+                    .userId(id)
+                    .execute();
+
+            List<Integer> friendIds = friendsResponse.getItems();
+            return friendIds;
+        } catch (ApiException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>();
     }
 
 }
