@@ -79,7 +79,7 @@ public class Controller implements Initializable{
         //printFriends(friends);
     }
 
-    private List<Integer> getCommonFriends(List<Integer> firstFriends, List<Integer> secondFriends){
+    public static List<Integer> getCommonFriends(List<Integer> firstFriends, List<Integer> secondFriends){
         List<Integer> out = new ArrayList<>();
         for (int tmp = firstFriends.size() - 1; tmp >= 0; tmp--){
             if(secondFriends.contains(firstFriends.get(tmp)))out.add(firstFriends.get(tmp));
