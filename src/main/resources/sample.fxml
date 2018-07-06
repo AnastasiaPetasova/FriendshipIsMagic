@@ -20,10 +20,21 @@
    </rowConstraints>
    <children>
       <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="6.0" prefWidth="52.0" text="Поиск" GridPane.columnIndex="1" GridPane.rowSpan="2"/>
-      <TextField fx:id="firstIdTextField"/>
-      <TextField fx:id="secondIdTextField" GridPane.rowIndex="1" />
+      <TextField fx:id="firstIdTextField" promptText="Введите первый id"/>
+      <TextField fx:id="secondIdTextField" GridPane.rowIndex="1" promptText="Введите второй id"/>
       <TableView fx:id="friendsTableView" prefHeight="200.0" prefWidth="225.0" GridPane.rowIndex="2" GridPane.columnSpan="2">
-
+         <columns>
+             <TableColumn fx:id="userIdColumn" text="id"/>
+             <TableColumn text="FullName">
+                 <columns>
+                     <TableColumn fx:id="userFirstNameColumn" text="FirstName"/>
+                     <TableColumn fx:id="userLastNameColumn" text="LastName"/>
+                 </columns>
+             </TableColumn>
+             <TableColumn fx:id="userSexColumn" text="Sex"/>
+             <TableColumn fx:id="userInterestsColumn" text="Interests"/>
+             <TableColumn fx:id="userBooksColumn" text="Books"/>
+         </columns>
       </TableView>
    </children>
 </GridPane>

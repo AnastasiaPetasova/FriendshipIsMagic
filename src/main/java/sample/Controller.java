@@ -28,6 +28,24 @@ public class Controller implements Initializable{
     @FXML
     TableView<Friend> friendsTableView;
 
+    @FXML
+    TableColumn<Friend, Integer> userIdColumn;
+
+    @FXML
+    TableColumn<Friend, String> userFirstNameColumn;
+
+    @FXML
+    TableColumn<Friend, String> userLastNameColumn;
+
+    @FXML
+    TableColumn<Friend, String> userSexColumn;
+
+    @FXML
+    TableColumn<Friend, String> userInterestsColumn;
+
+    @FXML
+    TableColumn<Friend, String> userBooksColumn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int defFirstId = 77903915;
@@ -40,21 +58,10 @@ public class Controller implements Initializable{
 
         friendsTableView.setPrefWidth(500);
 
-        TableColumn<Friend, String> userIdColumn = new TableColumn<>("id");
-        TableColumn<Friend, String> userFullNameColumn = new TableColumn<>("FullName");
-        TableColumn<Friend, String> userFirstNameColumn = new TableColumn<>("FirstName");
-        TableColumn<Friend, String> userLastNameColumn = new TableColumn<>("LastName");
-        TableColumn<Friend, String> userBooksColumn = new TableColumn<>("Books");
-        TableColumn<Friend, String> userInterestsColumn = new TableColumn<>("Interests");
-        TableColumn<Friend, String> sexColumn = new TableColumn<>("sex");
-
-        userFullNameColumn.getColumns().addAll(userFirstNameColumn, userLastNameColumn);
-        friendsTableView.getColumns().addAll(userIdColumn, userFullNameColumn, sexColumn, userInterestsColumn, userBooksColumn);
-
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         userFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        sexColumn.setCellValueFactory(new PropertyValueFactory<>("sex"));
         userLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        userSexColumn.setCellValueFactory(new PropertyValueFactory<>("sex"));
         userInterestsColumn.setCellValueFactory(new PropertyValueFactory<>("interests"));
         userBooksColumn.setCellValueFactory(new PropertyValueFactory<>("books"));
     }
