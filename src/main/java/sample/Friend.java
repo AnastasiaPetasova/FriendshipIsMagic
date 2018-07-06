@@ -50,6 +50,15 @@ public class Friend implements Comparable<Friend> {
         return sex;
     }
 
+    //    public String getSex() {
+//        switch (sex) {
+//            case MALE: return "Мужской";
+//            case FEMALE: return "Женский";
+//        }
+//
+//        return "";
+//    }
+
     public String getBooks() {
         return books;
     }

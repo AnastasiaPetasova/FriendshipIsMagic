@@ -20,13 +20,13 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-       <Button fx:id="searchButton" prefHeight="6.0" prefWidth="52.0" text="Поиск" GridPane.columnIndex="2" GridPane.rowSpan="2"/>
+       <Button fx:id="searchButton" prefHeight="6.0" prefWidth="52.0" text="Search" GridPane.columnIndex="2" GridPane.rowSpan="2"/>
 
-       <Label text="Первый id"/>
-       <TextField fx:id="firstIdTextField" promptText="Введите первый id" GridPane.columnIndex="1"/>
+       <Label text="First id"/>
+       <TextField fx:id="firstIdTextField" promptText="First id" GridPane.columnIndex="1"/>
 
-       <Label text="Второй id" GridPane.rowIndex="1"/>
-       <TextField fx:id="secondIdTextField" GridPane.rowIndex="1" promptText="Введите второй id" GridPane.columnIndex="1"/>
+       <Label text="Second id" GridPane.rowIndex="1"/>
+       <TextField fx:id="secondIdTextField" GridPane.rowIndex="1" promptText="Second id" GridPane.columnIndex="1"/>
        <TableView fx:id="friendsTableView" GridPane.rowIndex="2" GridPane.columnSpan="3">
            <columns>
                <TableColumn fx:id="userIdColumn" text="id"/>
