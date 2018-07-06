@@ -10,8 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.*;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable{
@@ -56,7 +59,11 @@ public class Controller implements Initializable{
 
         searchButton.setOnAction(event -> searchFriends());
 
-        friendsTableView.setPrefWidth(500);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        friendsTableView.setPrefSize(
+                screenSize.width * Main.SCENE_SIZE_COEFF * 0.9,
+                screenSize.height * Main.SCENE_SIZE_COEFF * 0.6
+        );
 
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         userFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -64,6 +71,20 @@ public class Controller implements Initializable{
         userSexColumn.setCellValueFactory(new PropertyValueFactory<>("sex"));
         userInterestsColumn.setCellValueFactory(new PropertyValueFactory<>("interests"));
         userBooksColumn.setCellValueFactory(new PropertyValueFactory<>("books"));
+
+        double tableWidth = friendsTableView.getPrefWidth();
+
+        userIdColumn.setPrefWidth(tableWidth * 0.1);
+        userFirstNameColumn.setPrefWidth(tableWidth * 0.15);
+        userLastNameColumn.setPrefWidth(tableWidth * 0.15);
+        userSexColumn.setPrefWidth(tableWidth * 0.1);
+
+        double leftWidth = userIdColumn.getPrefWidth() + userFirstNameColumn.getPrefWidth() + userLastNameColumn.getPrefWidth() + userSexColumn.getPrefWidth();
+
+        double rightWidth = tableWidth - leftWidth;
+
+        userInterestsColumn.setPrefWidth(rightWidth / 2);
+        userBooksColumn.setPrefWidth(rightWidth / 2);
     }
 
     private void searchFriends(){

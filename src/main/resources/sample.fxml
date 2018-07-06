@@ -27,7 +27,7 @@
 
        <Label text="Второй id" GridPane.rowIndex="1"/>
        <TextField fx:id="secondIdTextField" GridPane.rowIndex="1" promptText="Введите второй id" GridPane.columnIndex="1"/>
-       <TableView fx:id="friendsTableView" prefHeight="200.0" prefWidth="225.0" GridPane.rowIndex="2" GridPane.columnSpan="3">
+       <TableView fx:id="friendsTableView" GridPane.rowIndex="2" GridPane.columnSpan="3">
            <columns>
                <TableColumn fx:id="userIdColumn" text="id"/>
                <TableColumn text="FullName">
