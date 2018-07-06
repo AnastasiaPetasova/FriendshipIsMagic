@@ -57,26 +57,18 @@ public class Controller implements Initializable{
         userLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         userInterestsColumn.setCellValueFactory(new PropertyValueFactory<>("interests"));
         userBooksColumn.setCellValueFactory(new PropertyValueFactory<>("books"));
-
-//        Friend f1 = new Friend("Sasa", 345);
-//        ObservableList<Friend> tableList = FXCollections.observableArrayList();
-//        tableList.add(f1);
-//        friendsTableView.setItems(tableList);
-
     }
 
     private void searchFriends(){
         int firstId = Integer.parseInt(firstIdTextField.getText());
         int secondId = Integer.parseInt(secondIdTextField.getText());
 
-
         List<Integer> firstFriendIds =  VK_API.getFriendIds(firstId);
         List<Integer> secondFriendIds = VK_API.getFriendIds(secondId);
         List<Integer> commonFriendIds = getCommonFriends(firstFriendIds, secondFriendIds);
-        //List<Friend> friends = getFriendsInfo(friendsIds);
+
         List<Friend> commonFriends = VK_API.getFriendsInfo(commonFriendIds);
         printFriends(commonFriends);
-        //printFriends(friends);
     }
 
     public static List<Integer> getCommonFriends(List<Integer> firstFriends, List<Integer> secondFriends){
@@ -90,15 +82,5 @@ public class Controller implements Initializable{
     private void printFriends(List<Friend> friends) {
         ObservableList<Friend> friendsList = FXCollections.observableArrayList(friends);
         friendsTableView.setItems(friendsList);
-//        for (Friend friend : friends){
-//            System.out.println(friend.id + " " + friend.name);
-//        };
     }
-
-    //private List<Friend> getFriendsInfo(List<String> friendsIds) {
-       // Friend support = new Friend("Mipo Shavkatovich Eul", "males");
-        //Friend carry = new Friend("Ogre Magi", "males");
-        //List<Friend> team = new ArrayList<>(Arrays.asList(support, carry));
-        //return team;
-    //}
 }
