@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints />
@@ -27,7 +28,26 @@
 
        <Label text="Second id" GridPane.rowIndex="1"/>
        <TextField fx:id="secondIdTextField" GridPane.rowIndex="1" promptText="Second id" GridPane.columnIndex="1"/>
-       <TableView fx:id="friendsTableView" GridPane.rowIndex="2" GridPane.columnSpan="3">
+
+       <ImageView fx:id="imageFirstFriend" GridPane.rowIndex="2" GridPane.columnIndex="0"></ImageView>
+       <ImageView fx:id="imageSecondFriend" GridPane.rowIndex="2" GridPane.columnIndex="1"></ImageView>
+
+       <TableView fx:id="startUsersTableView" GridPane.rowIndex="3" GridPane.columnSpan="3">
+           <columns>
+               <TableColumn fx:id="startUserIdColumn" text="id"/>
+               <TableColumn text="FullName">
+                   <columns>
+                       <TableColumn fx:id="startUserFirstNameColumn" text="FirstName"/>
+                       <TableColumn fx:id="startUserLastNameColumn" text="LastName"/>
+                   </columns>
+               </TableColumn>
+               <TableColumn fx:id="startUserSexColumn" text="Sex"/>
+               <TableColumn fx:id="startUserInterestsColumn" text="Interests"/>
+               <TableColumn fx:id="startUserBooksColumn" text="Books"/>
+           </columns>
+       </TableView>
+       <Label GridPane.rowIndex="4" GridPane.columnSpan="3" fx:id="label"></Label>
+       <TableView fx:id="friendsTableView" GridPane.rowIndex="5" GridPane.columnSpan="3">
            <columns>
                <TableColumn fx:id="userIdColumn" text="id"/>
                <TableColumn text="FullName">

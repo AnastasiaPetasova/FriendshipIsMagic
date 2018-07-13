@@ -39,7 +39,7 @@ public class VK_API {
         try {
             List<UserXtrCounters> usersResponse = vk.users().get(actor)
                     .userIds(friendIds.stream().map(i -> i.toString()).collect(Collectors.toList()))
-                    .fields(UserField.CITY, UserField.PHOTO_MAX_ORIG, UserField.BOOKS, UserField.INTERESTS, UserField.SEX)
+                    .fields(UserField.BOOKS, UserField.INTERESTS, UserField.SEX)
                     .execute();
 
             friends = new LinkedList<>();
@@ -50,7 +50,7 @@ public class VK_API {
 
 
         } catch (ApiException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
         }
@@ -68,12 +68,37 @@ public class VK_API {
             List<Integer> friendIds = friendsResponse.getItems();
             return friendIds;
         } catch (ApiException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
         }
 
         return new ArrayList<>();
+    }
+
+    public static List<String> getPhotoLinks(List<Integer> ids) {
+        ServiceActor actor = new ServiceActor(APP_ID, CLIENT_SECRET, SERVICE_KEY);
+
+        List<String> photoLinks = null;
+        try {
+            List<UserXtrCounters> usersResponse = vk.users().get(actor)
+                    .userIds(ids.stream().map(i -> i.toString()).collect(Collectors.toList()))
+                    .fields(UserField.PHOTO_100)
+                    .execute();
+
+            photoLinks = new LinkedList<>();
+
+            for (UserXtrCounters user : usersResponse) {
+                photoLinks.add(user.getPhoto100());
+            }
+
+
+        } catch (ApiException e) {
+//            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        return photoLinks;
     }
 
 }

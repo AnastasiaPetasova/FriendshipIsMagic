@@ -1,7 +1,9 @@
+import org.junit.Assert;
 import org.junit.Test;
 import sample.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,22 +12,12 @@ import java.util.List;
  */
 public class CommonFriendTest {
 
-    static List<Integer> toList(int... array) {
-        List<Integer> list = new ArrayList<>();
-        for (int value : array) {
-            list.add(value);
-        }
-        return list;
-    }
-
-
     static void assertCommonIdsEquals(List<Integer> expected, List<Integer> actual) {
         Collections.sort(expected);
         Collections.sort(actual);
 
-        if (!expected.equals(actual)) {
-            throw new AssertionError("Списки не равны");
-        }
+        Assert.assertTrue("Списки не равны", expected.equals(actual));
+
     }
 
     void testIds(List<Integer> firstIds, List<Integer> secondIds, List<Integer> expectedCommonIds) {
@@ -38,40 +30,40 @@ public class CommonFriendTest {
 
     @Test
     public void testCommonFriends() {
-        List<Integer> firstIds = toList(1, 3, 5, 6);
-        List<Integer> secondIds = toList(6, 4, 3, 2);
+        List<Integer> firstIds = Arrays.asList(1, 3, 5, 6);
+        List<Integer> secondIds = Arrays.asList(6, 4, 3, 2);
 
-        List<Integer> expectedCommonIds = toList(3, 6);
+        List<Integer> expectedCommonIds = Arrays.asList(3, 6);
 
         testIds(firstIds, secondIds, expectedCommonIds);
     }
 
     @Test
     public void testCommonFriendsSame() {
-        List<Integer> firstIds = toList(1, 3, 5, 6);
+        List<Integer> firstIds = Arrays.asList(1, 3, 5, 6);
         List<Integer> secondIds = firstIds;
 
-        List<Integer> expectedCommonIds = toList(1, 3, 5, 6);
+        List<Integer> expectedCommonIds = Arrays.asList(1, 3, 5, 6);
 
         testIds(firstIds, secondIds, expectedCommonIds);
     }
 
     @Test
     public void testCommonFriendsEmpty() {
-        List<Integer> firstIds = toList(1, 3, 5, 6);
-        List<Integer> secondIds = toList();
+        List<Integer> firstIds = Arrays.asList(1, 3, 5, 6);
+        List<Integer> secondIds = Arrays.asList();
 
-        List<Integer> expectedCommonIds = toList();
+        List<Integer> expectedCommonIds = Arrays.asList();
 
         testIds(firstIds, secondIds, expectedCommonIds);
     }
 
     @Test
     public void testCommonFriendsNoCommon() {
-        List<Integer> firstIds = toList(1, 3, 5, 6);
-        List<Integer> secondIds = toList(2, 4);
+        List<Integer> firstIds = Arrays.asList(1, 3, 5, 6);
+        List<Integer> secondIds = Arrays.asList(2, 4);
 
-        List<Integer> expectedCommonIds = toList();
+        List<Integer> expectedCommonIds = Arrays.asList();
 
         testIds(firstIds, secondIds, expectedCommonIds);
     }
