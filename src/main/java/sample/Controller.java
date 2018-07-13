@@ -111,8 +111,7 @@ public class Controller implements Initializable{
 
         searchButton.setOnAction(event -> searchFriends());
         startUsersTableViewInitialize();
-//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension screenSize = new Dimension(1300, 780);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         friendsTableView.setPrefSize(
                 screenSize.width * Main.SCENE_SIZE_COEFF * 0.9,
                 screenSize.height * Main.SCENE_SIZE_COEFF * 0.6
