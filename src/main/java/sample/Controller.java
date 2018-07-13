@@ -42,7 +42,7 @@ public class Controller implements Initializable{
     Button searchButton;
 
     @FXML
-    TableView<Friend> friendsTableView;
+    public TableView<Friend> friendsTableView;
 
     @FXML
     TableView<Friend> startUsersTableView;
@@ -111,7 +111,8 @@ public class Controller implements Initializable{
 
         searchButton.setOnAction(event -> searchFriends());
         startUsersTableViewInitialize();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension screenSize = new Dimension(1300, 780);
         friendsTableView.setPrefSize(
                 screenSize.width * Main.SCENE_SIZE_COEFF * 0.9,
                 screenSize.height * Main.SCENE_SIZE_COEFF * 0.6
@@ -257,7 +258,7 @@ public class Controller implements Initializable{
         return out;
     }
 
-    private void printFriends(List<Friend> friends) {
+    public void printFriends(List<Friend> friends) {
         ObservableList<Friend> friendsList = FXCollections.observableArrayList(friends);
         friendsTableView.setItems(friendsList);
     }
